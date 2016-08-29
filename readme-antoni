@@ -1,0 +1,9 @@
+client looks for resource /hello 
+client2 looks for resource /c - 
+find a way to have more interesting path e.g: /c/g
+-----------------------------------------------------
+only one resource /c
+
+----------------gdb-------------
+remove -02
+add flag -g for debugging
