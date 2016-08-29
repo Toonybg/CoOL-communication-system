@@ -58,9 +58,15 @@ int main(int argc, char* argv[])
 	}
 
 	coap_add_option(request, COAP_OPTION_URI_PATH, uri.path.length, uri.path.s);
+	unsigned char buf[3];
+	coap_add_option(request, COAP_OPTION_CONTENT_TYPE, coap_encode_var_bytes(buf, COAP_MEDIATYPE_APPLICATION_CBOR), buf);
 	/* Set the handler and send the request */
 	
-	coap_register_response_handler(ctx, message_handler);
+	const char* request_data = "10801";
+	coap_add_data  (request, strlen(request_data), (unsigned char *)request_data);
+
+
+	coap_register_response_handler(ctx, post_handler);
 	printf("%s at %ld\n","client: sending...",time(NULL) );
 	//sleep(1);
 	coap_send_confirmed(ctx, ctx->endpoint, &dst_addr, request);
